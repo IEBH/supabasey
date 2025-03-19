@@ -1,13 +1,13 @@
 @iebh/supabasey
 ===============
-Utility function to wrap the main Supabase worker function but with utility handling.
+Utility function to wrap the main Supabase worker function.
 
-Unlike calling `supabase.FUNCTION` / `supabase.auth.FUNCTION` etc. this function takes a simple callback which then:
+Unlike calling `supabase.FUNCTION` / `supabase.auth.FUNCTION` etc. this function takes a simple callback which provides the following:
 
 1. Flattens non-promise responses into then-ables
 2. The query is forced to respond as a promise (prevents accidental query chaining)
-3. The response data object is forced as a POJO return (if any data is returned, otherwise void)
-4. Error responses throw with a logical error message rather than a weird object return
+3. The response data object is guaranteed to be a POJO return (if any data is returned, otherwise void)
+4. Errors throw with a logical error message rather than a weird object return (see `supabesey.throw()`)
 5. Retrying and back-off provided by default
 
 
@@ -18,6 +18,21 @@ This library exports a single function worker by default but also provides a few
 supabasey(callback, options)
 ----------------------------
 The main worker function, accepts a function which is called as `(supabase:supabseClient)`.
+
+```javascript
+let responses = await env.supabase(s => s
+    .from('widgets')
+    .select('id, data')
+)
+```
+
+Options are:
+
+
+| Option    | Type     | Default | Description                                                                                                 |
+|-----------|----------|---------|-------------------------------------------------------------------------------------------------------------|
+| `retries` | `Number` | `3`     | Number of times to attempt to rerun the query if it fails (utlity to auto-populate `options.retry.retries`) |
+| `retry`   | `Object` |         | Raw options passed to p-retry / node-retry, defaults are a suitable setup for Supabase                      |
 
 
 supabasey.middleware(options)
