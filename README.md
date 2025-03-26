@@ -51,7 +51,7 @@ Options are:
 
 supabasey.init(options)
 -----------------------
-Initialize Supabase, returning a Supabase session.
+Initialize Supabase, returning a Supabasey wrapper function.
 
 Options are:
 
