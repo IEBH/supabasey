@@ -1,5 +1,6 @@
 import {
-	createClient as Supabase
+	createClient as Supabase,
+	SupabaseClient
 } from '@supabase/supabase-js'
 import pRetry from 'p-retry';
 
@@ -280,4 +281,4 @@ supabasey.sessions = {};
 
 export default supabasey;
 // Named type exports
-export { BoundSupabaseyFunction };
+export { BoundSupabaseyFunction, SupabaseClient };

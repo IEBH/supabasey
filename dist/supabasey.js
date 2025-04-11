@@ -47,7 +47,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SupabaseClient = void 0;
 var supabase_js_1 = require("@supabase/supabase-js");
+Object.defineProperty(exports, "SupabaseClient", { enumerable: true, get: function () { return supabase_js_1.SupabaseClient; } });
 var p_retry_1 = require("p-retry");
 /**
  * Wraps a Supabase query function (like `supabase.from(...).select()`) with
