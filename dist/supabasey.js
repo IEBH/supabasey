@@ -74,7 +74,7 @@ var p_retry_1 = require("p-retry");
  * @throws Throws an error if the callback is not a function, if the session is invalid,
  *   if the Supabase query results in an error after retries, or if `p-retry` fails.
  */
-var coreSupabasey = function supabasy(cb, options) {
+var coreSupabasey = function Supabasey(cb, options) {
     // Sanity checks
     if (typeof cb != 'function')
         throw new Error('First argument to supabasey() must be a callback function');
@@ -256,6 +256,29 @@ supabasey.throw = function (err) {
         console.warn('Supabase query threw', err.message || err || 'Unknown error');
         throw new Error("".concat((err === null || err === void 0 ? void 0 : err.code) || 'UnknownError', ": ").concat((err === null || err === void 0 ? void 0 : err.message) || 'Unknown Supabase error'));
     }
+};
+/**
+* Convenience function to call a Supabase RPC function, wrapped in the usual Supabasey() function handler (with retry behaviour etc)
+*
+* @param method The method name to call
+* @param [args] Optional named arguments to pass to the RPC function
+* @param [options] Additional Supabasey wrapper options when calling the RPC functions - see `supabasey()` for details
+*
+* @returns The RPC function return, if any
+*/
+supabasey.rpc = function (method, args, options) {
+    var _this = this;
+    return supabasey(function (s) { return __awaiter(_this, void 0, void 0, function () {
+        var response;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, s.rpc(method, args)];
+                case 1:
+                    response = _a.sent();
+                    return [2 /*return*/, response];
+            }
+        });
+    }); }, options);
 };
 /**
  * A registry for active Supabase client sessions. Keys are typically session identifiers

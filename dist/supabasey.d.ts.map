@@ -1,1 +1,1 @@
-{"version":3,"file":"supabasey.d.ts","sourceRoot":"","sources":["../lib/supabasey.ts"],"names":[],"mappings":"AAKA,OAAO,EAAE,iBAAiB,EAAuC,MAAM,SAAS,CAAC;AA+EjF,QAAA,MAAM,SAAS,EAAoB,iBAAiB,CAAC;AAkLrD,eAAe,SAAS,CAAC"}
+{"version":3,"file":"supabasey.d.ts","sourceRoot":"","sources":["../lib/supabasey.ts"],"names":[],"mappings":"AAKA,OAAO,EAAE,iBAAiB,EAAuC,MAAM,SAAS,CAAC;AA+EjF,QAAA,MAAM,SAAS,EAAoB,iBAAiB,CAAC;AAoMrD,eAAe,SAAS,CAAC"}
