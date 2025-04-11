@@ -1,13 +1,22 @@
 {
   "name": "@iebh/supabasey",
   "description": "Utility wrapper around Supabase",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
-  "scripts": {
-    "lint": "eslint ."
-  },
+  "types": "./dist/supabasey.d.ts",
   "exports": {
-    ".": "./lib/supabasey.js"
+    ".": {
+      "import": "./dist/supabasey.js",
+      "types": "./dist/supabasey.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +34,7 @@
   },
   "devDependencies": {
     "@momsfriendlydevco/eslint-config": "^2.1.2",
-    "eslint": "^9.22.0"
+    "eslint": "^9.22.0",
+    "typescript": "^5.8.3"
   }
 }
