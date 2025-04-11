@@ -2,9 +2,9 @@ import { PostgrestError, AuthError, SupabaseClient } from '@supabase/supabase-js
 import { Options as PRetryOptions } from 'p-retry';
 type SupabaseResponse<T> = {
     data: T | null;
-    error: PostgrestError | AuthError | null;
+    error: Error | PostgrestError | AuthError | null;
 };
-export type SupabaseyCallback<T = any> = (supabase: SupabaseClient) => Promise<SupabaseResponse<T>>;
+export type SupabaseyCallback<T = any> = (supabase: SupabaseClient) => PromiseLike<SupabaseResponse<T>>;
 export interface SupabaseyOptions {
     session: string | SupabaseClient;
     retries?: number;
