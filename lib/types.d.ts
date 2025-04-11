@@ -46,7 +46,7 @@ type ExtendedSupabaseClient = SupabaseClient & {
 type SupabaseySessions = Record<string, ExtendedSupabaseClient>;
 
 // Type for the bound supabasey function returned by init/bindSession
-type BoundSupabaseyFunction = <T = any>(
+export type BoundSupabaseyFunction = <T = any>(
 	cb: SupabaseyCallback<T>,
 	options?: Omit<SupabaseyOptions, 'session'> // Exclude session as it's pre-bound
 ) => Promise<T>; // Resolves with data directly, throws on error

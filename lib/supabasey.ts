@@ -3,7 +3,7 @@ import {
 } from '@supabase/supabase-js'
 import pRetry from 'p-retry';
 
-import { SupabaseyCallable, SupabaseyCallback, SupabaseyOptions } from './types';
+import { SupabaseyCallable, SupabaseyCallback, SupabaseyOptions, BoundSupabaseyFunction } from './types';
 
 /**
  * Wraps a Supabase query function (like `supabase.from(...).select()`) with
@@ -279,3 +279,5 @@ supabasey.sessions = {};
 
 
 export default supabasey;
+// Named type exports
+export { BoundSupabaseyFunction };
