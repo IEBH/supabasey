@@ -30,7 +30,7 @@ import { SupabaseyCallable, SupabaseyCallback, SupabaseyOptions } from './types'
  * @throws Throws an error if the callback is not a function, if the session is invalid,
  *   if the Supabase query results in an error after retries, or if `p-retry` fails.
  */
-let coreSupabasey = function supabasy<T = any>(
+let coreSupabasey = function Supabasey<T = any>(
 	cb: SupabaseyCallback<T>,
 	options?: SupabaseyOptions
 ): Promise<T> {
@@ -246,7 +246,25 @@ supabasey.throw = function(err) {
 	}
 }
 
-
+/**
+* Convenience function to call a Supabase RPC function, wrapped in the usual Supabasey() function handler (with retry behaviour etc)
+*
+* @param method The method name to call
+* @param [args] Optional named arguments to pass to the RPC function
+* @param [options] Additional Supabasey wrapper options when calling the RPC functions - see `supabasey()` for details
+*
+* @returns The RPC function return, if any
+*/
+supabasey.rpc = function(
+	method,
+	args?,
+	options?
+) {
+	return supabasey(async (s) => {
+		const response = await s.rpc(method, args);
+		return response;
+	}, options);
+}
 
 /**
  * A registry for active Supabase client sessions. Keys are typically session identifiers

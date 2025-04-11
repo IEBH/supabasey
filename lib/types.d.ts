@@ -63,6 +63,11 @@ interface SupabaseyStatics {
 	bindSession: (session: string | SupabaseClient) => BoundSupabaseyFunction;
 	init: (options?: SupabaseyInitOptions) => Promise<BoundSupabaseyFunction>;
 	middleware: (options?: SupabaseyMiddlewareOptions) =>
-		(req: any, res: any, env: any, next?: any) => Promise<void>; // Adjust middleware args if needed
+		(req: any, res: any, env: any, next?: any) => Promise<void>;
+	rpc: <T = any>(
+		method: string,
+		args?: Record<string, any>,
+		options?: SupabaseyOptions
+	) => Promise<T>;
 	throw: (err: any) => never;
 }
