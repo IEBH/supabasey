@@ -10,9 +10,6 @@
       "types": "./dist/supabasey.d.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "lint": "eslint .",
     "build": "tsc",
