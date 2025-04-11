@@ -35,6 +35,17 @@ Options are:
 | `retry`   | `Object` |         | Raw options passed to p-retry / node-retry, defaults are a suitable setup for Supabase                      |
 
 
+supabasey.rpc(method, arguments, options)
+-----------------------------------------
+Convenience wrapper to call RPC functions.
+
+```javascript
+supabasey.rpc('hello_world');
+// ...is the equivelent of...
+supabasey(s => s.rpc('hello_world'))
+```
+
+
 supabasey.middleware(options)
 -----------------------------
 Middleware functionality to glue an initalized Supabase session into `env.supabase` for each request to an endpoint.
