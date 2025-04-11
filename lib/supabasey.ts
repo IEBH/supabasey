@@ -4,7 +4,7 @@ import {
 } from '@supabase/supabase-js'
 import pRetry from 'p-retry';
 
-import { SupabaseyCallable, SupabaseyCallback, SupabaseyOptions, BoundSupabaseyFunction } from './types';
+import { SupabaseyCallable, SupabaseyCallback, SupabaseyOptions, BoundSupabaseyFunction } from './types.js';
 
 /**
  * Wraps a Supabase query function (like `supabase.from(...).select()`) with
@@ -45,8 +45,8 @@ let coreSupabasey = function Supabasey<T = any>(
 			minTimeout: 100,
 			factor: 2, // Exponential backoff factor
 			randomize: true, // Try to randomize timeouts
-			onFailedAttempt: e => console.info(`[Attempt ${e.attemptNumber}/${e.attemptNumber + e.retriesLeft - 1}] failed to run Supabase query`),
-			shouldRetry: e => {
+			onFailedAttempt: (e: any) => console.info(`[Attempt ${e.attemptNumber}/${e.attemptNumber + e.retriesLeft - 1}] failed to run Supabase query`),
+			shouldRetry: (e: any) => {
 				console.log('QUERY SHOULD-RETRY', e);
 				return true;
 			},

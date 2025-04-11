@@ -1,9 +1,39 @@
 {
-  "include": ["lib/**/*"],
+  "include": ["lib/**/*"], // Make sure your source code is inside a 'lib' folder
   "compilerOptions": {
-    "allowJs": false,
-    "declaration": true,
-    "outDir": "dist",
-    "declarationMap": true
+    /* Base Options: */
+    "esModuleInterop": true, // Enables interoperability between CommonJS and ES Modules
+    "skipLibCheck": true, // Speeds up compilation by skipping type checking of declaration files
+    "target": "ES2020", // Or ES2021, ES2022, ESNext - choose a modern target
+    "allowJs": false, // Keep as false if you only use TypeScript
+    "resolveJsonModule": true, // Allows importing JSON files
+    "moduleDetection": "force", // Ensures files are treated as modules
+
+    /* Strictness */
+    "strict": false, // TODO: Set this to true and fix errors
+    "noUncheckedIndexedAccess": true, // Provide stricter checking for indexed access
+
+    /* If NOT transpiling with Babel: */
+    "module": "NodeNext", // Crucial: Use Node's next-gen module system
+    "outDir": "dist", // Your output directory
+
+    /* If your code runs in the DOM: */
+    // "lib": ["es2020", "dom", "dom.iterable"],
+
+    /* If your code doesn't run in the DOM: */
+    "lib": ["es2020"], // Adjust target lib based on your 'target' setting
+
+    /* Module Resolution Options: */
+    "moduleResolution": "NodeNext", // Crucial: Use Node's next-gen module resolution strategy
+    // "baseUrl": "./", // Optional: Base directory for non-relative module names
+    // "paths": {}, // Optional: Path mapping
+
+    /* Source Map Options: */
+    "sourceMap": true, // Generate source maps for debugging
+    "declaration": true, // Generate .d.ts files
+    "declarationMap": true, // Generate source maps for .d.ts files
+
+    /* Other Options */
+    "forceConsistentCasingInFileNames": true // Disallow inconsistently-cased references to the same file.
   }
 }
