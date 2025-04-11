@@ -1,7 +1,7 @@
 {
   "include": ["lib/**/*"],
   "compilerOptions": {
-    "allowJs": true,
+    "allowJs": false,
     "declaration": true,
     "outDir": "dist",
     "declarationMap": true
