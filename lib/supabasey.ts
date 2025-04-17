@@ -56,7 +56,7 @@ let coreSupabasey = function Supabasey<T = any>(
 
 	// Determine active session
 	let supabaseClient =
-		!settings.session ? (()=> { throw new Error('supabasey(cb, {session}) cannot be empty') })()
+		!settings.session ? (()=> { throw new Error('supabasey(cb, {session}) cannot be empty - specify a session or use bindSession() first') })()
 		: typeof settings.session == 'string' ? supabasey.sessions[settings.session] // Lookup by session ID
 		: typeof settings.session == 'object' ? settings.session // Assume we are being passed a raw Supabase client
 		: (()=> { throw new Error(`Unknown session type for supabasey(cb, {session}) - expected Object|String got ${typeof settings.session}`) })();
@@ -106,7 +106,11 @@ supabasey.bindSession = function supabaseySession(session) {
 
 	// Carry over utility funcitons to the binding
 	// @ts-ignore
-	sbyBound.rpc = supabasey.rpc;
+	sbyBound.rpc = (method, methodArgs, options) =>
+		supabasey.rpc(method, methodArgs, {
+			session,
+			...options,
+		});
 
 	return sbyBound;
 }
