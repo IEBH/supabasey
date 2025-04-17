@@ -186,7 +186,7 @@ supabasey.init = function supabaseyInit(options) {
  * @param [options.env] Environment variables (often provided by the framework, e.g., `env` in CF Workers).
  *   If not provided here, the middleware will expect it as the third argument (`env`) during execution.
  * @param [options.injectEnv=true] If true, the bound `supabasey` function will be attached
- *   to the environment object (passed as the third argument to the middleware) as `env.supabase`.
+ *   to the environment object (passed as the third argument to the middleware) as `env.supabasey`.
  * @param [options...] Other options are forwarded to `supabasey.init`.
  *
  * @returns An async middleware function compatible with frameworks like Express or Cloudflare Workers.
@@ -217,7 +217,7 @@ supabasey.middleware = function supabaseyMiddleware(options) {
 			env,
 		})
 			.then(supabasey => {
-				if (settings.injectEnv) env.supabase = supabasey;
+				if (settings.injectEnv) env.supabasey = supabasey;
 			})
 			.catch(err => supabasey.throw(err))
 	};
