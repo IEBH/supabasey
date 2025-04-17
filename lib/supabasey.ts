@@ -105,6 +105,7 @@ supabasey.bindSession = function supabaseySession(session) {
 	});
 
 	// Carry over utility funcitons to the binding
+	// @ts-ignore
 	sbyBound.rpc = supabasey.rpc;
 
 	return sbyBound;
