@@ -30,8 +30,8 @@
     "p-retry": "^6.2.1"
   },
   "devDependencies": {
-    "@momsfriendlydevco/eslint-config": "^2.1.2",
-    "eslint": "^9.22.0",
+    "@momsfriendlydevco/eslint-config": "^2.1.5",
+    "eslint": "^9.24.0",
     "typescript": "^5.8.3"
   }
 }
