@@ -99,10 +99,15 @@ const supabasey = coreSupabasey as SupabaseyCallable;
 supabasey.bindSession = function supabaseySession(session) {
 	if (typeof session == 'string' && !supabasey.sessions[session]) throw new Error(`Unable to bind to non-existant session "${session}"`);
 
-	return (cb, options) => supabasey(cb, {
+	let sbyBound = (cb, options) => supabasey(cb, {
 		session,
 		...options,
 	});
+
+	// Carry over utility funcitons to the binding
+	sbyBound.rpc = supabasey.rpc;
+
+	return sbyBound;
 }
 
 
