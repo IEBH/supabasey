@@ -125,7 +125,7 @@ supabasey.bindSession = function supabaseySession(session) {
  *   or Cloudflare Worker bindings). Used to source Supabase URL, key, user, and password.
  * @param [options.init=true] If true, creates a new Supabase client using `env.SUPABASE_URL`
  *   and `env.SUPABASE_KEY` if a session with the determined key doesn't already exist.
- * @param [options.login=true] If true, attempts to log in using `env.SUPABASE_USER` and
+ * @param [options.login=false] If true, attempts to log in using `env.SUPABASE_USER` and
  *   `env.SUPABASE_PASS` after ensuring the client is initialized. Skips if already logged in for this session.
  * @param [options.session='auto'] Determines the key for storing the session in `supabasey.sessions`.
  *   If 'auto', uses `env.SUPABASE_URL`. Otherwise, uses the provided string.
@@ -139,7 +139,7 @@ supabasey.init = function supabaseyInit(options) {
 	let settings = {
 		env: {},
 		init: true,
-		login: true,
+		login: false,
 		session: 'auto',
 		...options,
 	};

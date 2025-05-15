@@ -45,7 +45,7 @@ let coreSupabasey = function Supabasey(cb, options) {
         ...options,
     };
     // Determine active session
-    let supabaseClient = !settings.session ? (() => { throw new Error('supabasey(cb, {session}) cannot be empty'); })()
+    let supabaseClient = !settings.session ? (() => { throw new Error('supabasey(cb, {session}) cannot be empty - specify a session or use bindSession() first'); })()
         : typeof settings.session == 'string' ? supabasey.sessions[settings.session] // Lookup by session ID
             : typeof settings.session == 'object' ? settings.session // Assume we are being passed a raw Supabase client
                 : (() => { throw new Error(`Unknown session type for supabasey(cb, {session}) - expected Object|String got ${typeof settings.session}`); })();
@@ -83,10 +83,17 @@ const supabasey = coreSupabasey;
 supabasey.bindSession = function supabaseySession(session) {
     if (typeof session == 'string' && !supabasey.sessions[session])
         throw new Error(`Unable to bind to non-existant session "${session}"`);
-    return (cb, options) => supabasey(cb, {
+    let sbyBound = (cb, options) => supabasey(cb, {
         session,
         ...options,
     });
+    // Carry over utility funcitons to the binding
+    // @ts-ignore
+    sbyBound.rpc = (method, methodArgs, options) => supabasey.rpc(method, methodArgs, {
+        session,
+        ...options,
+    });
+    return sbyBound;
 };
 /**
  * Initializes a Supabase client, optionally logs in a user, registers the session,
@@ -97,7 +104,7 @@ supabasey.bindSession = function supabaseySession(session) {
  *   or Cloudflare Worker bindings). Used to source Supabase URL, key, user, and password.
  * @param [options.init=true] If true, creates a new Supabase client using `env.SUPABASE_URL`
  *   and `env.SUPABASE_KEY` if a session with the determined key doesn't already exist.
- * @param [options.login=true] If true, attempts to log in using `env.SUPABASE_USER` and
+ * @param [options.login=false] If true, attempts to log in using `env.SUPABASE_USER` and
  *   `env.SUPABASE_PASS` after ensuring the client is initialized. Skips if already logged in for this session.
  * @param [options.session='auto'] Determines the key for storing the session in `supabasey.sessions`.
  *   If 'auto', uses `env.SUPABASE_URL`. Otherwise, uses the provided string.
@@ -111,7 +118,7 @@ supabasey.init = function supabaseyInit(options) {
     let settings = {
         env: {},
         init: true,
-        login: true,
+        login: false,
         session: 'auto',
         ...options,
     };
@@ -168,7 +175,7 @@ supabasey.init = function supabaseyInit(options) {
  * @param [options.env] Environment variables (often provided by the framework, e.g., `env` in CF Workers).
  *   If not provided here, the middleware will expect it as the third argument (`env`) during execution.
  * @param [options.injectEnv=true] If true, the bound `supabasey` function will be attached
- *   to the environment object (passed as the third argument to the middleware) as `env.supabase`.
+ *   to the environment object (passed as the third argument to the middleware) as `env.supabasey`.
  * @param [options...] Other options are forwarded to `supabasey.init`.
  *
  * @returns An async middleware function compatible with frameworks like Express or Cloudflare Workers.
@@ -199,7 +206,7 @@ supabasey.middleware = function supabaseyMiddleware(options) {
         })
             .then(supabasey => {
             if (settings.injectEnv)
-                env.supabase = supabasey;
+                env.supabasey = supabasey;
         })
             .catch(err => supabasey.throw(err));
     };
