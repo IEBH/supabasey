@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint",
     "build": "tsc",
     "prepare": "npm run build"
   },
@@ -26,12 +26,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.1",
+    "@supabase/supabase-js": "^2.50.2",
     "p-retry": "^6.2.1"
   },
   "devDependencies": {
-    "@momsfriendlydevco/eslint-config": "^2.1.5",
-    "eslint": "^9.24.0",
+    "@momsfriendlydevco/eslint-config": "^2.2.1",
+    "eslint": "^9.29.0",
     "typescript": "^5.8.3"
   }
 }
