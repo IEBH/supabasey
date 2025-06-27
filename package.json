@@ -1,7 +1,7 @@
 {
   "name": "@iebh/supabasey",
   "description": "Utility wrapper around Supabase",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "type": "module",
   "types": "./dist/supabasey.d.ts",
   "exports": {
