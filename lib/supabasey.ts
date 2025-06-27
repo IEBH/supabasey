@@ -1,6 +1,6 @@
 import {
 	createClient as Supabase,
-	SupabaseClient
+	type SupabaseClient,
 } from '@supabase/supabase-js'
 import pRetry from 'p-retry';
 

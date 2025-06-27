@@ -1,4 +1,4 @@
-import { createClient as Supabase, SupabaseClient } from '@supabase/supabase-js';
+import { createClient as Supabase, } from '@supabase/supabase-js';
 import pRetry from 'p-retry';
 /**
  * Wraps a Supabase query function (like `supabase.from(...).select()`) with
@@ -262,6 +262,4 @@ supabasey.rpc = function (method, args, options) {
  */
 supabasey.sessions = {};
 export default supabasey;
-// Named type exports
-export { SupabaseClient };
 //# sourceMappingURL=supabasey.js.map
