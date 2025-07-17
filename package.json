@@ -11,8 +11,8 @@
     }
   },
   "scripts": {
-    "lint": "eslint",
     "build": "tsc",
+    "lint": "eslint",
     "prepare": "npm run build"
   },
   "repository": {
@@ -30,8 +30,8 @@
     "p-retry": "^6.2.1"
   },
   "devDependencies": {
-    "@momsfriendlydevco/eslint-config": "^2.2.1",
-    "eslint": "^9.29.0",
+    "@momsfriendlydevco/eslint-config": "^2.3.1",
+    "eslint": "^9.31.0",
     "typescript": "^5.8.3"
   }
 }
